@@ -1,0 +1,9 @@
+data/
+models/
+analysis/
+*.csv
+*.pth
+*.joblib
+*.gz
+.ipynb_checkpoints/
+__pycache__/

@@ -1,0 +1,38 @@
+# main.py — Run all project notebooks sequentially
+import papermill as pm
+import os
+
+# Folder containing all notebooks
+NOTEBOOK_DIR = "."
+
+# Ordered list of your 4 notebooks
+NOTEBOOKS = [
+    "EDA_and_Preprocessing.ipynb",
+    "DeepLearning_model.ipynb",
+    "RL_baseline_agent.ipynb",
+    "Analysis_and_Comparison.ipynb"
+]
+
+def run_pipeline():
+    print("\n🚀 Starting full Loan Policy Optimization pipeline...\n")
+
+    for nb in NOTEBOOKS:
+        input_path = os.path.join(NOTEBOOK_DIR, nb)
+        output_path = os.path.join(NOTEBOOK_DIR, f"output_{nb}")
+
+        print(f"▶️ Running {nb} ...")
+        try:
+            pm.execute_notebook(
+                input_path=input_path,
+                output_path=output_path,
+                parameters={}  # You can pass params here if needed
+            )
+            print(f"✅ Completed {nb}\n")
+        except Exception as e:
+            print(f"❌ Error while running {nb}: {e}")
+            raise e
+
+    print("🎉 All notebooks executed successfully!\n")
+
+if __name__ == "__main__":
+    run_pipeline()
